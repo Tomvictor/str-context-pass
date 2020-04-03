@@ -2,13 +2,13 @@
     ANSYS mechanical script parser
 """
 
-input_file_location = "./script.py"
+INPUT_FILE_LOCATION = "./script.py"
 
 # inputs
 VALUE1 = 100
 VALUE2 = 200
 VALUE3 = 300
-# context: key value pairs need to be replaces
+# context: key value pairs need to be replaced
 context = {"input1": VALUE1, "input2": VALUE2}
 
 
@@ -16,6 +16,15 @@ class Parser(object):
     """
         script parser class
     """
+
+    def __init__(self, file, context):
+        """
+        :param file <string> : script file location
+        :param context <dict> : key value pair to be replaced
+        :return <dict> : rendered data
+        """
+        self.file = file
+        self.context = context
 
     def stringify(self, file):
         """read given file and and return as srting
@@ -40,17 +49,16 @@ class Parser(object):
             sentance = sentance.replace(str(key), str(value))
         return sentance
 
-    def render(self, file, context):
-        """returns test with replaced key value pairs
-        :param file <string> : script file location
-        :param context <dict> : key value pair to be replaced
-        :return <dict> : rendered data
+    def render(self):
         """
-        sentance = self.stringify(file)
-        data = self.render_context(sentance, context)
+            returns test with replaced key value pairs
+        """
+
+        sentance = self.stringify(self.file)
+        data = self.render_context(sentance, self.context)
         return data
 
 
-utils = Parser()
-at_cmd = utils.render(input_file_location, context)
+utils = Parser(INPUT_FILE_LOCATION, context)
+at_cmd = utils.render()
 print(at_cmd)
