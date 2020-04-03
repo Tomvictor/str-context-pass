@@ -51,7 +51,7 @@ class Parser(object):
 
     def render(self):
         """
-            returns test with replaced key value pairs
+            returns file with replaced key value pairs
         """
 
         sentance = self.stringify(self.file)
